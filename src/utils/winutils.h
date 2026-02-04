@@ -3,5 +3,5 @@
 #include <functional>
 #include <vector>
 
-BOOL MoveCurrWindow(HWND& activeWindow, int wx, int wy);
+BOOL MoveWindow(HWND &activeWindow, int wx, int wy, int sx = 0, int sy = 0);
 std::vector<HWND> GetAllActiveWindows();

@@ -2,18 +2,20 @@
 #include "../types.h"
 #include <iostream>
 
-BOOL MoveCurrWindow(HWND &activeWindow, int wx, int wy) {
+BOOL MoveWindow(HWND &activeWindow, int wx, int wy, int sx, int sy) {
     RECT activeWindowSize;
     GetWindowRect(activeWindow, &activeWindowSize);
     int borderX = GetSystemMetrics(SM_CXSIZEFRAME) + GetSystemMetrics(SM_CXPADDEDBORDER);
 
+    UINT flags = SWP_NOZORDER;
+    if(sx == 0 || sy == 0) flags |= SWP_NOSIZE;
     SetWindowPos(
         activeWindow,
         nullptr,
         wx-borderX,
         wy,
-        0, 0,
-        SWP_NOSIZE | SWP_NOZORDER
+        sx, sy,
+        flags
     );
 
     return true; 

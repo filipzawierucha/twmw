@@ -1,5 +1,5 @@
 #include <vector>
-#include "types.h"
+#include "../types.h"
 #include <iostream>
 
 BOOL MoveCurrWindow(HWND &activeWindow, int wx, int wy) {
@@ -19,6 +19,17 @@ BOOL MoveCurrWindow(HWND &activeWindow, int wx, int wy) {
     return true; 
 }
 
-BOOL GetAllActiveWindows() {
-    return 0;
+std::vector<HWND> GetAllActiveWindows() {
+    std::vector<HWND> windows;
+
+    EnumWindows(
+        [](HWND hwnd, LPARAM lParam) -> BOOL {
+            auto vec = reinterpret_cast<std::vector<HWND>*>(lParam);
+            vec->push_back(hwnd);
+            return TRUE; 
+        },
+        reinterpret_cast<LPARAM>(&windows)
+    );
+
+    return windows;
 }

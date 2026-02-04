@@ -1,6 +1,6 @@
 #pragma once
-#include <functional>
 #include "winutils.h"
+#include <functional>
 #include <vector>
 
 struct keybind {
@@ -8,4 +8,10 @@ struct keybind {
     std::function<void(void)>& callback;
 };
 
-std::vector<keybind> keybinds{};
+struct {
+  UINT screen_width = ::GetSystemMetrics(SM_CXSCREEN);
+  UINT screen_height = ::GetSystemMetrics(SM_CYSCREEN);
+  UINT apps_number; 
+} desktop;
+
+extern std::vector<keybind> keybinds;

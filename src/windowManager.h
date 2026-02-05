@@ -3,4 +3,4 @@
 
 #include <Windows.h>
 
-// BOOL SetWindowPosition();
+BOOL SetWindowPosition();
